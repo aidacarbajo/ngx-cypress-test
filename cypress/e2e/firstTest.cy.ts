@@ -105,10 +105,16 @@ describe('Our first suite', () => {
     });
 
 
-    it('assert property', () => {
+    it.only('assert property', () => {
         cy.get('.sidebar-toggle').click();
         cy.contains('Datepicker').click();
         cy.get('.sidebar-toggle').click();
+
+        let date = new Date();
+        date.setDate(date.getDate() + 5);
+
+        let futureDay = date.getDay();
+        let futureMonth = date.toLocaleDateString('default', {month: 'short'});
 
         cy.contains('nb-card', 'Common Datepicker').find('input').then(input => {
             cy.wrap(input).click();
@@ -196,7 +202,7 @@ describe('Our first suite', () => {
     });
     
 
-    it.only('Web tables', () => {
+    it('Web tables', () => {
         cy.get('.sidebar-toggle').click();
         cy.contains('Tables & Data').click();
         cy.contains('Smart Table').click();
